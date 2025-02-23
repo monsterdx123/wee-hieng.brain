@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wee Hieng 的脑子</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f0f0;
+    }
+    #brain {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      background-image: url('./brain-image.jpg.jpg'); /* 脑子的图片 */
+      background-size: cover;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+    .image-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Wee Hieng 的脑子</h1>
+  <div id="brain">
+    <!-- 点击区域 -->
+    <div id="domo" style="position: absolute; top: 50px; left: 100px; width: 50px; height: 50px;"></div>
+    <div id="kelly" style="position: absolute; top: 150px; left: 200px; width: 50px; height: 50px;"></div>
+    <!-- 其他区域 -->
+  </div>
+  <div class="message" id="message"></div>
+
+  <!-- 图片弹窗 -->
+  <div id="image-popup" class="image-popup">
+    <img id="popup-image" src="" alt="Popup Image">
+    <p id="popup-text"></p>
+  </div>
+
+  <script>
+    const messageElement = document.getElementById('message');
+    const brain = document.getElementById('brain');
+    const imagePopup = document.getElementById('image-popup');
+    const popupImage = document.getElementById('popup-image');
+    const popupText = document.getElementById('popup-text');
+
+    // 随机文字和图片
+    const texts = ['DOMO', 'KELLY', 'JIACHEE', '月>', '暴躁的蔡文姬', '暴躁的瑶'];
+    const images = [
+      './caiwenji.jpg.jpeg',
+      './domo.jpg.jpeg',
+      './jiachee.jpg.jpeg',
+      './kelly.jpg.jpeg',
+      './moon.jpg.jpeg',
+      './yao.jpg.jpeg'
+    ];
+
+    // 随机选择一个文字和一张图片
+    function getRandomItem(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    // 点击脑子区域
+    brain.addEventListener('click', (event) => {
+      if (event.target === brain) {
+        // 点击外部区域
+        messageElement.textContent = '你真的好漂亮。';
+        imagePopup.style.display = 'none'; // 隐藏弹窗
+      } else {
+        // 点击内部区域
+        const randomText = getRandomItem(texts);
+        const randomImage = getRandomItem(images);
+        popupText.textContent = randomText;
+        popupImage.src = randomImage;
+        imagePopup.style.display = 'block'; // 显示弹窗
+      }
+    });
+  </script>
+</body>
+</html>
